@@ -3,6 +3,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import RootReducer from './Reducers/Root.reducer';
+import InitialState from './Reducers/InitialState';
 import Home from './Views/Home';
 
 // Add redux devtools
@@ -16,6 +17,7 @@ const enhancer = composeEnhancers(
 // Apply thunk middleware to store with Redux devtools
 const store = createStore(
   RootReducer,
+  InitialState,
   enhancer,
 );
 

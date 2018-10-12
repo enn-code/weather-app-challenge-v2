@@ -5,26 +5,35 @@ const search = (state = { searchTerm: 'London' }, action) => {
   switch (action.type) {
     case Constants.UPDATE_SEARCH:
       return {
-        searchTerm: action.searchTerm
-      }
+        ...state,
+        searchTerm: action.searchTerm,
+      };
     default:
-      return state
+      return state;
   }
 };
-
 
 const weatherData = (state = {}, action) => {
   switch (action.type) {
     case Constants.UPDATE_DATA:
-      return action.data;
+      return {
+        ...state,
+        weather: action.data,
+        isLoading: action.isLoading,
+      };
+    case Constants.LOADING_DATA:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+      };
     default:
-      return 'none'
+      return state;
   }
-}
+};
 
 const RootReducer = combineReducers({
   weatherData,
-  search
+  search,
 });
 
 export default RootReducer;

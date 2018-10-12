@@ -1,23 +1,26 @@
-import {openWeatherMapKey} from '../Config/config';
+import { openWeatherMapKey } from '../Config/config';
 import Constants from './ActionTypes';
 
-export const fetchWeatherData = (dispatch, params) => {
-
+const fetchWeatherData = params => (dispatch) => {
   const url = 'http://api.openweathermap.org/data/2.5/forecast?q=London&mode=json';
-
-  return fetch(`${url}&APPID=${openWeatherMapKey}`).then((response) => {
-    console.log(response);
-    return response.json();
-  }).then((myJson) => {
-    console.log(myJson);
-    dispatch({
-      type: Constants.UPDATE_DATA,
-      data: myJson
-    })
+  dispatch({
+    type: Constants.LOADING_DATA,
+    isLoading: true
   });
-}
+  console.log('fetchWeatherData', dispatch, params);
+  return fetch(`${url}&APPID=${openWeatherMapKey}`)
+    .then(response => response.json())
+    .then((myJson) => {
+      console.log('data received', myJson);
+      dispatch({
+        type: Constants.UPDATE_DATA,
+        isLoading: false,
+        data: myJson,
+      });
+    });
+};
 
-
+export default fetchWeatherData;
 
 
 // export const fetchWeatherData = (params) => {

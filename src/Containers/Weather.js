@@ -1,39 +1,45 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchWeatherData } from '../Actions/WeatherActions';
+import { StyledButton } from '../Styles/CommonComponents';
+import fetchWeatherData from '../Actions/WeatherActions';
 import { RenderBasicList, RenderBasicTable } from '../Components/WeatherComponents';
 
-class Weather extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoading: false,
-    };
-  }
+const StyledWeatherContainer = styled.div`
+  margin: 5px;
+`;
 
+
+const generateWeatherDataList = (list) => {
+  list.map((item, i) => (
+    <p key={i}>
+      lolol
+      {RenderBasicList(item)}
+    </p>
+  ));
+};
+
+class Weather extends Component {
   componentWillMount() {
-    console.log('componentWillMount Weather Container', this.props);
     fetchWeatherData();
   }
 
   componentWillReceiveProps() {
-
+    console.log('componentWillReceiveProps', this.props);
   }
 
-  generateWeatherDataList(list) {
-    // Make component
-    return list.map((item, i) => {
-      return (
-        <p key={i}>
-          {RenderBasicList(item)}
-        </p>
-      )
-    });
+  toggleDataCall = (params) => {
+
+  };
+
+  toggleRenderMethod = (option) => {
+
   }
 
   render() {
     const { isLoading, dataError, weather } = this.props;
+
     if (isLoading) {
       return <p>Loading...</p>;
     }
@@ -42,32 +48,38 @@ class Weather extends Component {
     }
 
     return (
-      <div>
+      <StyledWeatherContainer>
+        <div>
+          Controls:
+          <StyledButton selected={true}>Simple</StyledButton>
+          <StyledButton selected={false}>Pretty</StyledButton>
+        </div>
         {weather.list && (
           <div>
             <ul>
-              {this.generateWeatherDataList(weather.list)}
+              {generateWeatherDataList(weather.list)}
             </ul>
             {RenderBasicTable(weather.list)}
           </div>
         )}
-      </div>
+      </StyledWeatherContainer>
     );
   }
 }
 
 Weather.propTypes = {
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
   dataError: PropTypes.string,
   weather: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
-  weather: state.weatherData,
+  weather: state.weatherData.weather,
+  isLoading: state.weatherData.isLoading,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchWeatherData: x => dispatch(fetchWeatherData(x)),
+  fetchWeatherData: dispatch(fetchWeatherData()),
 });
 
 export default connect(
