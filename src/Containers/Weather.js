@@ -37,7 +37,6 @@ class Weather extends Component {
   };
 
   toggleRenderPretty = (isPretty) => {
-    console.log('toggleRenderPretty', isPretty, updatePrettyPreference);
     this.props.updatePrettyPreference(isPretty);
   }
 
@@ -84,14 +83,19 @@ class Weather extends Component {
     return (
       <StyledWeatherContainer>
         <StyledWeatherControls>
+          <p>
+            A weather app that renders data into a simple table.
+          </p>
           Controls:&nbsp;
           <StyledButton
+            displayId='simpleSwitch'
             selected={!search.isRenderPrettyTable}
             onClick={() => this.toggleRenderPretty(false)}
           >
             Simple
           </StyledButton>
           <StyledButton
+            displayId='prettySwitch'
             selected={search.isRenderPrettyTable}
             onClick={() => this.toggleRenderPretty(true)}
           >
@@ -105,7 +109,7 @@ class Weather extends Component {
             </StyledLocation>
             {this.renderTable(weather.list)}
             <ul>
-              {this.generateWeatherDataList(weather.list)}
+              {/* {this.generateWeatherDataList(weather.list)} */}
             </ul>
           </div>
         )}

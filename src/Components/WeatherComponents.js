@@ -9,7 +9,12 @@ import Paper from '@material-ui/core/Paper';
 
 const StyledTableBody = styled.tbody`
   text-align: right;
-`
+`;
+
+const StyledTable = styled.table`
+  width: 100%;
+  font-weight: lighter;
+`;
 
 export const RenderBasicList = item => (
   <span>
@@ -21,7 +26,7 @@ export const RenderBasicList = item => (
 );
 
 export const RenderBasicTable = items => (
-  <table>
+  <StyledTable>
     <thead>
       <tr>
         <th>Time</th>
@@ -37,7 +42,7 @@ export const RenderBasicTable = items => (
         })
       }
     </StyledTableBody>
-  </table>
+  </StyledTable>
 );
 
 export const RenderBasicCells = (item, i) => (
