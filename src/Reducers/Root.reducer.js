@@ -1,12 +1,17 @@
 import { combineReducers } from 'redux';
 import Constants from '../Actions/ActionTypes';
 
-const search = (state = { searchTerm: 'London' }, action) => {
+const search = (state = { searchTerm: 'London', isRenderPrettyTable: false }, action) => {
   switch (action.type) {
     case Constants.UPDATE_SEARCH:
       return {
         ...state,
         searchTerm: action.searchTerm,
+      };
+    case Constants.UPDATE_SEARCH_PRETTY:
+      return {
+        ...state,
+        isRenderPrettyTable: action.isRenderPrettyTable,
       };
     default:
       return state;

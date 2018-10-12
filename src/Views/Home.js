@@ -5,15 +5,20 @@ import { StyledLogo } from '../Styles/CommonComponents';
 import Weather from '../Containers/Weather';
 
 const StyledContainer = styled.div`
+  background: linear-gradient(${DesignVariables.primaryBgColourDark}, ${DesignVariables.primaryBgColourLight});
   background-color: ${DesignVariables.primaryBgColourLight};
   color: ${DesignVariables.primaryFontColour};
 `;
 
+const StyledLogoContainer = styled(StyledLogo)`
+  margin: 10px;
+`;
+
 const Home = () => (
   <StyledContainer>
-    <StyledLogo>
+    <StyledLogoContainer>
       Weather Toggle App
-    </StyledLogo>
+    </StyledLogoContainer>
     <Weather />
   </StyledContainer>
 );

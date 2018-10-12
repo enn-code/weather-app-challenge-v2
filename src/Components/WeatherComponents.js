@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 const StyledTableBody = styled.tbody`
   text-align: right;
@@ -15,7 +20,7 @@ export const RenderBasicList = item => (
   </span>
 );
 
-export const RenderBasicTable = item => (
+export const RenderBasicTable = items => (
   <table>
     <thead>
       <tr>
@@ -27,7 +32,7 @@ export const RenderBasicTable = item => (
     </thead>
     <StyledTableBody>
       {
-        item.map((item, i) => {
+        items.map((item, i) => {
           return RenderBasicCells(item, i);
         })
       }
@@ -42,4 +47,30 @@ export const RenderBasicCells = (item, i) => (
     <td>{item.weather[0].description}</td>
     <td>{item.wind.speed}</td>
   </tr>
+);
+
+
+export const RenderPrettyTable = items => (
+  <Paper>
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableCell>Time</TableCell>
+          <TableCell>Temperature</TableCell>
+          <TableCell>Description</TableCell>
+          <TableCell>Wind speed</TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {items.map((item, i) => (
+          <TableRow key={i}>
+            <TableCell>{item.dt_txt}</TableCell>
+            <TableCell numeric>{Math.round(item.main.temp - 273.15)}</TableCell>
+            <TableCell numeric>{item.weather[0].description}</TableCell>
+            <TableCell numeric>{item.wind.speed}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </Paper>
 );

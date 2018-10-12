@@ -1,7 +1,7 @@
 import { openWeatherMapKey } from '../Config/config';
 import Constants from './ActionTypes';
 
-const fetchWeatherData = params => (dispatch) => {
+export const fetchWeatherData = params => (dispatch) => {
   const url = 'http://api.openweathermap.org/data/2.5/forecast?q=London&mode=json';
   dispatch({
     type: Constants.LOADING_DATA,
@@ -20,16 +20,10 @@ const fetchWeatherData = params => (dispatch) => {
     });
 };
 
-export default fetchWeatherData;
-
-
-// export const fetchWeatherData = (params) => {
-//   fetch(`http://api.openweathermap.org/data/2.5/forecast?id=524901&APPID=${openWeatherMapKey}`)
-//   .then(function(response) {
-//     console.log(response);
-//     return response.json();
-//   })
-//   .then(function(myJson) {
-//     console.log(JSON.stringify(myJson));
-//   });
-// }
+export const updatePrettyPreference = isPretty => (dispatch) => {
+  console.log('WeatherActions', isPretty);
+  return dispatch({
+    type: Constants.UPDATE_SEARCH_PRETTY,
+    isRenderPrettyTable: isPretty,
+  });
+};
