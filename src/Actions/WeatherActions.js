@@ -18,9 +18,7 @@ export const fetchWeatherData = params => (dispatch) => {
     });
 };
 
-export const updatePrettyPreference = isPretty => (dispatch) => {
-  return dispatch({
-    type: Constants.UPDATE_SEARCH_PRETTY,
-    isRenderPrettyTable: isPretty,
-  });
-};
+export const updatePrettyPreference = isPretty => ({
+  type: Constants.UPDATE_SEARCH_PRETTY,
+  isRenderPrettyTable: isPretty,
+});

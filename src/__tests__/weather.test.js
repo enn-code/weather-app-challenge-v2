@@ -8,7 +8,7 @@ import Weather from '../Containers/Weather';
 // const middlewares = [thunk];
 const mockStore = createMockStore(InitialState);
 
-describe('>>>Weather --- Shallow Render REACT COMPONENTS', () => {
+describe('Weather component renders', () => {
   let wrapper;
 
   beforeEach(() => {
