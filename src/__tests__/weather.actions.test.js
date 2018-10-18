@@ -11,4 +11,16 @@ describe('Weather actions', () => {
     };
     expect(actions.updatePrettyPreference(isPretty)).toEqual(expectedAction);
   });
+
+  it('fetchWeatherData --- should dispatch loading state true action', () => {
+    expect(actions.fetchWeatherData()).toEqual()
+  });
+
+  it('fetchWeatherData --- should update weather data in store', () => {
+
+  });
+
+  it('fetchWeatherData --- should set loading state to false', () => {
+
+  });
 });

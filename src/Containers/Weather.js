@@ -2,26 +2,20 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyledButton } from '../Styles/CommonComponents';
 import { fetchWeatherData, updatePrettyPreference } from '../Actions/WeatherActions';
 import { RenderBasicList, RenderBasicTable, RenderPrettyTable } from '../Components/WeatherComponents';
+import WeatherControls from '../Components/WeatherControls';
 
 const StyledWeatherContainer = styled.div`
   margin: 5px;
   text-align: center;
 `;
 
-const StyledWeatherControls = styled.div`
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 10px;
-`;
-
 const StyledLocation = styled.div`
   font-weight: bold;
   font-size: 22px;
   margin-bottom: 5px;
-`
+`;
 
 class Weather extends Component {
   componentWillMount() {
@@ -82,26 +76,7 @@ class Weather extends Component {
 
     return (
       <StyledWeatherContainer>
-        <StyledWeatherControls>
-          <p>
-            A weather app that renders data into a simple table.
-          </p>
-          Controls:&nbsp;
-          <StyledButton
-            displayId='simpleSwitch'
-            selected={!search.isRenderPrettyTable}
-            onClick={() => this.toggleRenderPretty(false)}
-          >
-            Simple
-          </StyledButton>
-          <StyledButton
-            displayId='prettySwitch'
-            selected={search.isRenderPrettyTable}
-            onClick={() => this.toggleRenderPretty(true)}
-          >
-            Pretty
-          </StyledButton>
-        </StyledWeatherControls>
+        <WeatherControls search={search} toggleRenderPretty={this.toggleRenderPretty} />
         {weather.list && (
           <div>
             <StyledLocation>
